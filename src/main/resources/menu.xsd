@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.task5.com/menu"
+        xmlns:tns="http://www.task5.com/menu">
+    <element name="kitchen">
+        <complexType>
+            <sequence>
+                <element name="menu" type="tns:menu" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="menu">
+        <sequence>
+            <element name="dish" type="tns:dish" maxOccurs="unbounded"/>
+        </sequence>
+        <attribute name="type" use="required">
+            <simpleType>
+                <restriction base="string">
+                    <enumeration value="ХОЛОДНЫЕ ЗАКУСКИ"/>
+                    <enumeration value="ГОРЯЧИЕ ЗАКУСКИ"/>
+                    <enumeration value="ЗАВТРАКИ"/>
+                    <enumeration value="САЛАТЫ"/>
+                    <enumeration value="СУПЫ"/>
+                    <enumeration value="РЫБНЫЕ БЛЮДА"/>
+                    <enumeration value="МЯСНЫЕ БЛЮДА"/>
+                    <enumeration value="ГАРНИРЫ"/>
+                    <enumeration value="БЛЮДА НА МАНГАЛЕ"/>
+                    <enumeration value="ОТ ШЕФ-ПОВАРА"/>
+                    <enumeration value="ПРИЛОЖЕНИЕ"/>
+                    <enumeration value="ДЕСЕРТ"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+    </complexType>
+
+    <complexType name="dish">
+        <sequence>
+            <element name="description" type="tns:description"/>
+        </sequence>
+        <attribute name="ID" type="tns:dishID" use="required"/>
+        <attribute name="photo" type="string" use="required"/>
+        <attribute name="title" type="string" use="required"/>
+    </complexType>
+
+    <complexType name="description">
+        <sequence>
+            <element name="contains"
+                     type="tns:contains"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+            />
+        </sequence>
+        <attribute name="value" type="string" use="optional"/>
+        <attribute name="portion" type="tns:portion" use="required"/>
+        <attribute name="cost" type="int" use="optional"/>
+    </complexType>
+
+    <complexType name="contains">
+        <attribute name="number" type="int"/>
+        <attribute name="ingredient" type="string" use="required"/>
+        <attribute name="cost" type="int" use="optional"/>
+    </complexType>
+
+    <simpleType name="portion">
+        <restriction base="string">
+            <pattern value="([1-9]\d*)|(([1-9]\d*/)+[1-9]\d*)|([1-9]\d*\sшт\.)"/>
+        </restriction>
+    </simpleType>
+
+    <simpleType name="dishID">
+        <restriction base="ID">
+            <pattern value="[a-zA-Z0-9]{2,8}"/>
+        </restriction>
+    </simpleType>
+</schema>

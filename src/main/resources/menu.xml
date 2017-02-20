@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<menu:kitchen xmlns:menu="http://www.task5.com/menu">
+    <menu type="ХОЛОДНЫЕ ЗАКУСКИ">
+        <dish ID="a1" photo="photo" title="Ассорти рыбное">
+            <description value="Слабосолённая форель, сёмга" portion="100/20/15"/>
+        </dish>
+        <dish ID="a2" photo="photo" title="Тарталетки с красной икрой">
+            <description value="Тарталетки с красной икрой" portion="60/50"/>
+        </dish>
+        <dish ID="a3" photo="photo" title="Ассорти баклажаны">
+            <description value="Жаренные баклажаны с помидорами" portion="100/5">
+                <contains ingredient="с помидорами" number="1"/>
+                <contains ingredient="с чесноком" number="2"/>
+                <contains ingredient="с орехами" number="3"/>
+            </description>
+        </dish>
+        <dish ID="a4" photo="photo" title="Лимон">
+            <description portion="60"/>
+        </dish>
+    </menu>
+    <menu type="ГОРЯЧИЕ ЗАКУСКИ">
+        <dish ID="b1" photo="photo" title="Лобио с шампиньонами">
+            <description value="Фасоль с шампиньонами и грецким орехом" portion="150/5" cost="105"/>
+        </dish>
+        <dish ID="b2" photo="photo" title="Жульен">
+            <description portion="120/1">
+                <contains ingredient="с курицей" cost="145" number="1"/>
+                <contains ingredient="с грибами" cost="155" number="2"/>
+            </description>
+        </dish>
+    </menu>
+    <menu type="ЗАВТРАКИ">
+        <dish ID="c1" photo="photo" title="Омлет">
+            <description portion="100"/>
+        </dish>
+        <dish ID="c2" photo="photo" title="Блинчики с мясом">
+            <description value="Жареные блинчики с мясом" portion="150"/>
+        </dish>
+    </menu>
+</menu:kitchen>
