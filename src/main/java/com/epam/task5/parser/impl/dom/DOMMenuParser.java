@@ -5,6 +5,7 @@ import com.epam.task5.bean.Description;
 import com.epam.task5.bean.Dish;
 import com.epam.task5.constant.menu.*;
 import com.epam.task5.parser.XMLMenuParser;
+import com.epam.task5.parser.exception.XMLMenuParserException;
 import com.epam.task5.parser.impl.dom.util.DOMHelper;
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
 import org.w3c.dom.Document;
@@ -19,14 +20,20 @@ import java.util.*;
  * Created by Yauheni_Tsitsenkou on 2/20/2017.
  */
 public class DOMMenuParser implements XMLMenuParser {
-    public Map<String, List<Dish>> parse(String filePath) throws IOException, SAXException {
+    public Map<String, List<Dish>> parse(String filePath) throws XMLMenuParserException {
         DOMParser parser = new DOMParser();
-        parser.parse(filePath);
+
+        try {
+            parser.parse(filePath);
+        } catch (SAXException | IOException e) {
+            throw new XMLMenuParserException(e);
+        }
+
         Document document = parser.getDocument();
 
         Element root = document.getDocumentElement();
 
-        Map<String, List<Dish>> kitchen = new HashMap<String, List<Dish>>();
+        Map<String, List<Dish>> kitchen = new HashMap<>();
         List<Dish> dishes = null;
 
         NodeList menuNodes = root.getElementsByTagName(Tag.MENU);
@@ -41,7 +48,7 @@ public class DOMMenuParser implements XMLMenuParser {
     }
 
     private List<Dish> getDishes(Element menuElement) {
-        List<Dish> dishes = new LinkedList<Dish>();
+        List<Dish> dishes = new LinkedList<>();
         NodeList dishNodes = menuElement.getElementsByTagName(Tag.DISH);
         Dish dish = null;
         Element dishElement = null;
@@ -54,7 +61,7 @@ public class DOMMenuParser implements XMLMenuParser {
             dish.setDescription(getDescription(dishElement));
             dishes.add(dish);
         }
-        return new ArrayList<Dish>(dishes);
+        return new ArrayList<>(dishes);
     }
 
     private Description getDescription(Element dishElement) {
@@ -71,7 +78,7 @@ public class DOMMenuParser implements XMLMenuParser {
 
     private List<Contains> getContainsList(Element descriptionElement) {
         NodeList containsNodes = descriptionElement.getElementsByTagName(Tag.CONTAINS);
-        List<Contains> containsList = new LinkedList<Contains>();
+        List<Contains> containsList = new LinkedList<>();
         Contains contains = null;
         for (int i = 0; i < containsNodes.getLength(); i++) {
             contains = new Contains();
@@ -81,6 +88,6 @@ public class DOMMenuParser implements XMLMenuParser {
             contains.setCost(containsElement.getAttribute(ContainsAttribute.COST));
             containsList.add(contains);
         }
-        return new ArrayList<Contains>(containsList);
+        return new ArrayList<>(containsList);
     }
 }

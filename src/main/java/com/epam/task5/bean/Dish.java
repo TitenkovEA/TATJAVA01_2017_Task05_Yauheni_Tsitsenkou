@@ -61,6 +61,16 @@ public class Dish implements Serializable {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Dish{" +
+                "id='" + id + '\'' +
+                ", photoUrl='" + photoUrl + '\'' +
+                ", title='" + title + '\'' +
+                ", description=" + description +
+                '}';
+    }
+
     public String getId() {
         return id;
     }

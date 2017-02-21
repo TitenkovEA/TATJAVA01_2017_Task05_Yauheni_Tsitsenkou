@@ -47,6 +47,15 @@ public class Contains implements Serializable {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Contains{" +
+                "ingredient='" + ingredient + '\'' +
+                ", number='" + number + '\'' +
+                ", cost='" + cost + '\'' +
+                '}';
+    }
+
     public void setNumber(String number) {
         this.number = number;
     }

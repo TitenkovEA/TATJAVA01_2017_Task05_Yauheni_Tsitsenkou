@@ -59,6 +59,16 @@ public class Description implements Serializable {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Description{" +
+                "value='" + value + '\'' +
+                ", portion='" + portion + '\'' +
+                ", cost='" + cost + '\'' +
+                ", containsList=" + containsList +
+                '}';
+    }
+
     public String getValue() {
         return value;
     }
