@@ -8,6 +8,8 @@ import com.epam.task5.parser.XMLMenuParser;
 import com.epam.task5.parser.exception.XMLMenuParserException;
 import com.epam.task5.parser.impl.dom.util.DOMHelper;
 import com.sun.org.apache.xerces.internal.parsers.DOMParser;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -20,12 +22,15 @@ import java.util.*;
  * Created by Yauheni_Tsitsenkou on 2/20/2017.
  */
 public class DOMMenuParser implements XMLMenuParser {
+    private final static Logger logger = LogManager.getLogger(DOMMenuParser.class);
+
     public Map<String, List<Dish>> parse(String filePath) throws XMLMenuParserException {
         DOMParser parser = new DOMParser();
 
         try {
             parser.parse(filePath);
         } catch (SAXException | IOException e) {
+            logger.error(e);
             throw new XMLMenuParserException(e);
         }
 
